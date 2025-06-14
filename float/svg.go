@@ -221,10 +221,10 @@ func (svg *SVG) RotateTranslate(x, y float64, r float64) {
 func (svg *SVG) Group(s ...string) { svg.printf("<g %s\n", endstyle(s, `>`)) }
 
 // Gid begins a group, with the specified id
-func (svg *SVG) Gid(s string) {
+func (svg *SVG) Gid(id string, s ...string) {
 	svg.print(`<g id="`)
-	xml.Escape(svg.Writer, []byte(s))
-	svg.println(`">`)
+	xml.Escape(svg.Writer, []byte(id))
+	svg.printf(`" %s`, endstyle(s, ">\n"))
 }
 
 // Gend ends a group (must be paired with Gsttyle, Gtransform, Gid).
